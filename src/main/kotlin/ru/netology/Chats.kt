@@ -1,7 +1,7 @@
 package ru.netology
 
 data class Chat(
-    val messages: MutableList<Message> = mutableListOf()
+    var messages: MutableList<Message> = mutableListOf()
 )
 
 data class Message(

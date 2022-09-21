@@ -10,16 +10,14 @@ fun main() {
     println(ChatService.getMessages(1, 1))
     ChatService.printChats()
     println(ChatService.getUnreadChatCount())
-//    ChatService.deleteChat(1)
-//    ChatService.deleteChat(2)
-    ChatService.printChats()
+
     ChatService.getListChat()
-    println(")))))))))))))))")
-    println(ChatService.size())
-    ChatService.getNotEmptyChat()
-    ChatService.deleteMessage()
-    val chat = Chat()
-    println(chat.messages.size)
+    ChatService.deleteMessage(2, Message(3, "Bye", 2.23, 11.33))
+    ChatService.updateMessage(1, Message(1, "Hello", 1.23, 11.11),
+        newMessage = Message(8, "44", 4.44, 4.44))
+    ChatService.getListChat()
+
+
 
 }
 

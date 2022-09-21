@@ -1,7 +1,5 @@
 package ru.netology
 
-//import com.sun.org.apache.xml.internal.serializer.utils.Utils.messages
-
 
 object ChatService {
     private val chats = mutableMapOf<Int, Chat>() //Int - id пользователя
@@ -30,7 +28,7 @@ object ChatService {
 
 
     //todo 5. Получение списка чатов, где есть последнее сообщение, не пустых// Посмотреть еще, коряво как-то
-    fun getNotEmptyChat() { //Получить список чатов, из нот эмпти использовать
+    fun getNotEmptyChat() {
         if (chats.isNotEmpty()) return chats.forEach { println(it) }
     }
 
@@ -59,42 +57,33 @@ object ChatService {
         println(chats)
     }
 
-    //2. Удаление сообщения (при удалении последнего сообщения в чате весь чат удаляется)
-    fun deleteMessage(){ //Удалить сообщение из чата,
+    //todo 2. Удаление сообщения (при удалении последнего сообщения в чате весь чат удаляется)
+    fun deleteMessage(userId: Int, message: Message)  { //Удалить сообщение из чата,
         // если удаляешь единственное, удаляется весь чат
-     //   Chat().messages.removeAt(messageId)
-//        val chat = 1 to message
-//        val mes = messageId to message
- //       return chat.messages.remove(mes) { message.messageId == messageId}
- //       return chat.messages.removeIf { message.messageId == messageId}
- //       println(Chat().messages.size)
-        val chat = Chat()
-        chats.keys.size
-//        chats.values-=(Message(1))
-      //  Chat().messages.size
-      // chats.values.remove(userId, message)
-      //  Chat().messages.removeAt(userId)
-
-//        val chat = Chat().messages
-//        chat.removeAt(messageId)
- //       val del = deleteChat()
-
+        //todo Нужно ли что-то возвращать? Наверное нет
+//        val clear = ::deleteChat
+        chats[userId]?.messages?.remove(message)
+        if (chats[userId]?.messages?.isEmpty() == true) {chats.remove(userId)}
+      //  val clear = ::deleteChat
     }
 
-    fun size2() = Chat().messages.size > 0
+    //todo 3. Редактирование сообщения Корявенько вышло
+    fun updateMessage(userId: Int, message: Message, newMessage: Message) {
 
+//        chats[userId]?.messages = newMessage.copy(messageId = newMessage.messageId, text = newMessage.text,
+//        date = newMessage.date, time = newMessage.time, read = newMessage.read)
 
+        chats[userId]?.messages?.remove(message)
+        chats[userId]?.messages?.add(newMessage)
 
-    //3. Редактирование сообщения
-    fun updateMessage(userId: Int, newMessage: Message): Message {
-        val newChat = chats[userId]
-      //  val newMessage = Message(1)
-
-        if (newChat != null) {
-            chats[userId] = newChat.copy(messages = newChat.messages)
-        }
-
-        return newMessage
+//        val newChat = chats[userId]
+//      //  val newMessage = Message(1)
+//
+//        if (newChat != null) {
+//            chats[userId] = newChat.copy(messages = newChat.messages)
+//        }
+//
+//        return newMessage
         //Использовать функцию put
         //      message.messageId.
         //       chats.getOrPut(messageId) { Chat(mutableListOf()) }.messages = newMessage
@@ -109,6 +98,12 @@ object ChatService {
 
     }
 
+    fun clear() {
+        chats.clear()
+
+    }
+
 }
+
 
 
