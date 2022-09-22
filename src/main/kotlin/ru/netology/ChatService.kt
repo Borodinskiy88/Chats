@@ -4,24 +4,22 @@ package ru.netology
 object ChatService {
     private val chats = mutableMapOf<Int, Chat>() //Int - id пользователя
 
+    fun getChats(): MutableMap<Int, Chat> {
+        return chats
+    }
+
     fun size(): Int {
         return chats.values.size
     }
 
-    //Функции Чатс:
-//todo 1. Создание чата (автоматически, после отправки первого сообщения)
-    fun createChat() {
-
-    }
-
-    //todo 2. Удаление чата (целиком удаляется вся переписка)
+//todo++    //todo 2. Удаление чата (целиком удаляется вся переписка)
     fun deleteChat(userId: Int) = chats.remove(userId)
 
     //todo 3. Получение списка чатов //Получить весь список чатов, посмотреть в прошлой работе
     fun getListChat() = chats.forEach { (println(it)) }
 
 
-    //todo 4. Получение количества непрочитанных чатов
+//todo+++    //todo 4. Получение количества непрочитанных чатов
     fun getUnreadChatCount(): Int {
         return chats.values.count { chat: Chat -> chat.messages.any { !it.read } }
     }
