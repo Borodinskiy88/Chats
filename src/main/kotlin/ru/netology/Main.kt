@@ -15,7 +15,13 @@ fun main() {
     ChatService.deleteMessage(2, Message(3, "Bye", 2.23, 11.33))
     ChatService.updateMessage(1, Message(1, "Hello", 1.23, 11.11),
         newMessage = Message(8, "44", 4.44, 4.44))
+    println("!!!!!!!!!!!")
     ChatService.getListChat()
+    println(ChatService.getChats())
+    println("-----------")
+    println(ChatService.getNotEmptyChat())
+    println("")
+    println(ChatService.getNotEmptyChat())
 
 
 

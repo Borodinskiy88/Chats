@@ -4,31 +4,42 @@ package ru.netology
 object ChatService {
     private val chats = mutableMapOf<Int, Chat>() //Int - id пользователя
 
-    fun getChats(): MutableMap<Int, Chat> {
-        return chats
-    }
+    //todo+++
+    fun getChats(): MutableMap<Int, Chat> = chats
 
     fun size(): Int {
         return chats.values.size
     }
 
-//todo++    //todo 2. Удаление чата (целиком удаляется вся переписка)
+    //todo++    //todo 2. Удаление чата (целиком удаляется вся переписка)
     fun deleteChat(userId: Int) = chats.remove(userId)
 
-    //todo 3. Получение списка чатов //Получить весь список чатов, посмотреть в прошлой работе
+    //todo???    //todo 3. Получение списка чатов //Получить весь список чатов, посмотреть в прошлой работе
     fun getListChat() = chats.forEach { (println(it)) }
 
 
-//todo+++    //todo 4. Получение количества непрочитанных чатов
+    //todo+++    //todo 4. Получение количества непрочитанных чатов
     fun getUnreadChatCount(): Int {
         return chats.values.count { chat: Chat -> chat.messages.any { !it.read } }
     }
 
 
-    //todo 5. Получение списка чатов, где есть последнее сообщение, не пустых// Посмотреть еще, коряво как-то
-    fun getNotEmptyChat() {
-        if (chats.isNotEmpty()) return chats.forEach { println(it) }
+// Первая версия мне нравится больше    //todo 5. Получение списка чатов, где есть последнее сообщение, не пустых// Посмотреть еще, коряво как-то
+
+//    fun getNotEmptyChat() {
+//        if (chats.isNotEmpty()) return chats.forEach { println(it) }
+//    }
+
+//todo+++    //todo готово!!!
+    fun getNotEmptyChat(): Map<Int, Chat> {
+        return chats.filter { chats.isNotEmpty() }
     }
+
+
+//    fun getNotEmptyChat(): MutableMap<Int, Chat> {
+//        if (chats.isNotEmpty()) return chats
+//        return throw NoChatException()
+//    }
 
     //todo 6. Получение списка сообщений из чата
     fun getMessages(userId: Int, count: Int): List<Message> {  //count - количество сообщений,
@@ -56,23 +67,24 @@ object ChatService {
     }
 
     //todo 2. Удаление сообщения (при удалении последнего сообщения в чате весь чат удаляется)
-    fun deleteMessage(userId: Int, message: Message)  { //Удалить сообщение из чата,
+    fun deleteMessage(userId: Int, message: Message) { //Удалить сообщение из чата,
         // если удаляешь единственное, удаляется весь чат
         //todo Нужно ли что-то возвращать? Наверное нет
 //        val clear = ::deleteChat
         chats[userId]?.messages?.remove(message)
-        if (chats[userId]?.messages?.isEmpty() == true) {chats.remove(userId)}
-      //  val clear = ::deleteChat
+        if (chats[userId]?.messages?.isEmpty() == true) { chats.remove(userId) }
+        //  val clear = ::deleteChat
     }
 
     //todo 3. Редактирование сообщения Корявенько вышло
-    fun updateMessage(userId: Int, message: Message, newMessage: Message) {
+    fun updateMessage(userId: Int, message: Message, newMessage: Message): Message {
 
 //        chats[userId]?.messages = newMessage.copy(messageId = newMessage.messageId, text = newMessage.text,
 //        date = newMessage.date, time = newMessage.time, read = newMessage.read)
 
         chats[userId]?.messages?.remove(message)
         chats[userId]?.messages?.add(newMessage)
+        return newMessage
 
 //        val newChat = chats[userId]
 //      //  val newMessage = Message(1)
@@ -86,12 +98,12 @@ object ChatService {
         //      message.messageId.
         //       chats.getOrPut(messageId) { Chat(mutableListOf()) }.messages = newMessage
         //       if (newMessage.messageId == messageId) newMessage.copy()
- //       chat.messages.removeAt(messageId)
- //       chats[userId] = Chat()
+        //       chat.messages.removeAt(messageId)
+        //       chats[userId] = Chat()
 
- //       chats.values.removeAt(message) //{ chat: Chat -> chat.messages.remove(newMessage) }
+        //       chats.values.removeAt(message) //{ chat: Chat -> chat.messages.remove(newMessage) }
 //        return chat.messages.filter { message: Message -> message.messageId == newMessage.messageId }
- //       chats.remove(message) { message: Message -> message.messageId == newMessage.messageId }
+        //       chats.remove(message) { message: Message -> message.messageId == newMessage.messageId }
 //        chat.messages == newMessage { message: Message -> message.messageId == messageId }
 
     }

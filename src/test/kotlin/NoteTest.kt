@@ -1,6 +1,6 @@
 package ru.netology
 
-import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase.*
 import org.junit.Before
 import org.junit.Test
 
@@ -24,14 +24,39 @@ class NoteTest {
         val result = ChatService.getChats()
         assertEquals(emptyMap<Int, Chat>(), result)
     }
-
+//todo придумать тест
     @Test
     fun getListChatTest() {
-        val chat = ChatService.getListChat()
         ChatService.addMessage(1, Message(1, "Hello", 1.23, 11.11))
-        ChatService.getListChat()
-        val result = ChatService.getChats()
-        assertEquals(chat[0], result)
+        val result = ChatService.getListChat()
 
     }
+
+    @Test
+    fun getChatsTest() {
+        ChatService.addMessage(1, Message(1, "Hello", 1.23, 11.11))
+        val result = ChatService.getChats()
+        assertTrue(result.isNotEmpty())
+    }
+
+//    @Test
+//    fun getNotEmptyChatTest() {
+//        ChatService.addMessage(1, Message(1, "Hello", 1.23, 11.11))
+//        ChatService.addMessage(2, Message(1, "Hello", 1.23, 11.11))
+//        val chat: String = ChatService.getNotEmptyChat().toString()
+//        assertEquals(2, chat)
+//
+//    }
+
+    @Test
+    fun getNotEmptyChatTest() {
+        ChatService.addMessage(1, Message(1, "Hello", 1.23, 11.11))
+        ChatService.addMessage(2, Message(1, "Hello", 1.23, 11.11))
+        val chat = ChatService.getNotEmptyChat().size
+        assertEquals(2, chat)
+
+    }
+
 }
+
+

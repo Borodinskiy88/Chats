@@ -4,6 +4,7 @@ data class Chat(
     var messages: MutableList<Message> = mutableListOf()
 )
 
+
 data class Message(
     val messageId: Int,
     val text: String = "",
