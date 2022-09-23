@@ -12,10 +12,4 @@ data class Message(
     val time: Double = 00.00,
     var read: Boolean = false
 )
-//data class Chats(
-//    val userId: Int = 0,
-//    val friendId: Int = 0,
-//    val chatCount: Int = 0,
-//    val messages: MutableList<Message> = mutableListOf()
-//)
 
