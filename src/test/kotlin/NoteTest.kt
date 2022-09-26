@@ -71,10 +71,9 @@ class NoteTest {
     @Test
     fun updateMessageTest() {
         ChatService.addMessage(1, Message(1, "Hello", 1.23, 11.11, true))
-        val newMessage = Message(111, "NewMessage", 31.12, 22.22, false)
+        val newMessage = Message(2, "NewMessage", 31.12, 22.22, false)
         val update = ChatService.updateMessage(
-            1, message = Message(1, "Hello", 1.23, 11.11, true),
-            newMessage = Message(111, "NewMessage", 31.12, 22.22, false)
+            1, 1, newMessage = Message(2, "NewMessage", 31.12, 22.22, false)
         )
         val result = newMessage == update
         assertEquals(true, result)

@@ -11,10 +11,7 @@ fun main() {
     ChatService.printChats()
     println(ChatService.getUnreadChatCount())
     ChatService.deleteMessage(2, Message(3, "Bye", 2.03, 11.33))
-    ChatService.updateMessage(
-        1, Message(1, "Hello", 1.03, 11.11),
-        newMessage = Message(8, "44", 4.04, 4.44)
-    )
+    ChatService.updateMessage(1, 1, newMessage = Message(8, "44", 4.04, 4.44))
     ChatService.getListChat()
 
 }

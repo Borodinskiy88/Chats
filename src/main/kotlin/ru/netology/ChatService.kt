@@ -43,15 +43,12 @@ object ChatService {
 
     fun deleteMessage(userId: Int, message: Message) {
         chats[userId]?.messages?.remove(message)
-        if (chats[userId]?.messages?.isEmpty() == true) {
-            chats.remove(userId)
-        }
+        chats[userId]?.messages?.ifEmpty { chats.remove(userId) }
     }
 
 
-    fun updateMessage(userId: Int, message: Message, newMessage: Message): Message {
-        chats[userId]?.messages?.remove(message)
-        chats[userId]?.messages?.add(newMessage)
+    fun updateMessage(userId: Int, indexMessage: Int, newMessage: Message): Message {
+        chats[userId]?.messages?.set(indexMessage - 1, newMessage)
         return newMessage
     }
 
